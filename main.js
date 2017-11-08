@@ -47,10 +47,17 @@ function update() {
   tx = mouse.x;
   ty = mouse.y;
 
-  dotPos.x = tx;
-  dotPos.y = ty;
+	// 目標値にだんだんと近づける
+	ease = 0.15; // こいつが小さいとよりゆっくりと近くようになる
 
-  // オブジェクトの情報更新
+	var radius = 2.25;
+	var degree = 30;
+	var rad = degree * Math.PI / 180;
+
+	dotPos.x += (tx - dotPos.x) * radius * Math.cos(rad);
+	dotPos.y += (ty - dotPos.y) * radius * Math.sin(rad);
+
+	// オブジェクトの情報更新
   // 位置指定時、基準点を真ん中にするためサイズの半分だけずらす
   TweenMax.set(dot, {
     x:dotPos.x - dot.width() * 0.5,
